@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, StatusBar, ScrollView } from 'react-native'; // Import ScrollView
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, StatusBar, ScrollView } from 'react-native'; 
 import axios from 'axios';
 import ModalScreen from './ModalScreen';
 import { AntDesign } from '@expo/vector-icons';

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, Modal, TouchableOpacity, Alert } fro
 import React, { useState } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import axios from 'axios';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 const ModalScreen = ({ openModal, setOpenModal, fetchLeagues }) => {
     const [title, setTitle] = useState('');
@@ -20,61 +20,61 @@ const ModalScreen = ({ openModal, setOpenModal, fetchLeagues }) => {
                     'Content-Type': 'application/json',
                 },
             });
-            
+           
             Alert.alert("League Created Successfully");
             fetchLeagues();
-            setOpenModal(false); 
+            setOpenModal(false);
+            setMembers('');
+            setTitle('');
         } catch (error) {
             Alert.alert('Error creating league:', error);
         }
     };
 
-   
+
 
     return (
-        <GestureHandlerRootView style={styles.preMain}>
-            <View>
-                <Modal animationType="slide" transparent={true} visible={openModal}>
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <View style={styles.header}>
-                                <Text style={styles.headerText}>Create League</Text>
-                                <TouchableOpacity onPress={() => setOpenModal(false)}>
-                                    <Entypo name="circle-with-cross" size={24} color="#fff" />
-                                </TouchableOpacity>
+        <View style={styles.preMain}>
+            <Modal animationType="slide" transparent={true} visible={openModal}>
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <View style={styles.header}>
+                            <Text style={styles.headerText}>Create League</Text>
+                            <TouchableOpacity onPress={() => setOpenModal(false)}>
+                                <Entypo name="circle-with-cross" size={24} color="#fff" />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <View style={styles.inputWrapper}>
+                                <Text style={styles.headerSubText}>Title</Text>
+                                <TextInput
+                                    placeholder="Enter Title"
+                                    placeholderTextColor="#ccc"
+                                    style={[styles.input, { marginTop: 30 }]}
+                                    value={title}
+                                    onChangeText={setTitle}
+                                />
                             </View>
-                            <View style={styles.inputContainer}>
-                                <View style={styles.inputWrapper}>
-                                    <Text style={styles.headerSubText}>Title</Text>
-                                    <TextInput
-                                        placeholder="Enter Title"
-                                        placeholderTextColor="#ccc"
-                                        style={[styles.input, { marginTop: 10 }]}
-                                        value={title}
-                                        onChangeText={setTitle}
-                                    />
-                                </View>
-                                <View style={styles.inputWrapper}>
-                                    <Text style={styles.headerSubText}>Members</Text>
-                                    <TextInput
-                                        placeholder="Enter Members"
-                                        placeholderTextColor="#ccc"
-                                        style={[styles.input, { marginTop: 30 }]}
-                                        value={members}
-                                        onChangeText={setMembers}
-                                    />
-                                </View>
-                            </View>
-                            <View>
-                                <TouchableOpacity style={styles.createButton} onPress={createLeague}>
-                                    <Text style={styles.createButtonText}>CREATE LEAGUE AND INVITE MEMBERS</Text>
-                                </TouchableOpacity>
+                            <View style={styles.inputWrapper}>
+                                <Text style={styles.headerSubText}>Members</Text>
+                                <TextInput
+                                    placeholder="Enter Members"
+                                    placeholderTextColor="#ccc"
+                                    style={[styles.input, { marginTop: 30 }]}
+                                    value={members}
+                                    onChangeText={setMembers}
+                                />
                             </View>
                         </View>
+                        <View>
+                            <TouchableOpacity style={styles.createButton} onPress={createLeague}>
+                                <Text style={styles.createButtonText}>CREATE LEAGUE AND INVITE MEMBERS</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </Modal>
-            </View>
-        </GestureHandlerRootView>
+                </View>
+            </Modal>
+        </View>
     );
 }
 
@@ -118,12 +118,12 @@ const styles = StyleSheet.create({
         color: '#ccc',
         marginBottom: 10,
         marginLeft: 5,
-        marginTop:10
+        marginTop: 10
     },
     inputContainer: {
         width: '100%',
         marginBottom: 20,
-       
+
     },
     inputWrapper: {
         marginBottom: 30,

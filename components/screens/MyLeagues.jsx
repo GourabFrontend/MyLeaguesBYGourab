@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, ActivityIndicator,Dimensions,Image} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, ActivityIndicator,Dimensions,Image,StatusBar} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLeagues, toggleModal, toggleMembers } from '../redux/leaguesSlice';
 import ModalScreen from './ModalScreen';
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: '#1a1a1a',
-      paddingTop: 30,
+      paddingTop: StatusBar.currentHeight,
     },
     header: {
       backgroundColor: "#1e1e1e",

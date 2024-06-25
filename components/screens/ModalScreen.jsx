@@ -8,7 +8,7 @@ import { fetchLeagues } from '../redux/leaguesSlice';
   // ModalScreen component displays a modal for creating a new league.
   // It uses React hooks to manage state and Redux hooks to dispatch actions.
   // It renders a modal with input fields for the league title and members.
-  // It also displays a button to create the league and invite members.
+  // It also displays a button to create the league.
  
 const ModalScreen = () => {
   // Dispatch is used to dispatch actions to the Redux store.

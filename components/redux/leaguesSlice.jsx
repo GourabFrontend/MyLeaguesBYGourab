@@ -10,7 +10,7 @@ const initialState = {
 
 
 // fetchLeagues  is used to fetch the list of leagues.
-export const fetchLeagues = createAsyncThunk('leagues/fetchLeagues', async (userId) => {
+export const fetchLeagues = createAsyncThunk('fetchLeagues', async (userId) => {
   try {
     const response = await axios.post(
       'https://api.bracketocracy.com/v1.0/api.php?query=league/getLeagues',
@@ -25,7 +25,7 @@ export const fetchLeagues = createAsyncThunk('leagues/fetchLeagues', async (user
 
 
 // createNewLeague  is used to create a new league.
-export const createNewLeague = createAsyncThunk('leagues/createNewLeague', async ({ title, members, userId }) => {
+export const createNewLeague = createAsyncThunk('createNewLeague', async ({ title, members, userId }) => {
   try {
     const response = await axios.post(
       'https://api.bracketocracy.com/v1.0/api.php?query=league/createLeague',

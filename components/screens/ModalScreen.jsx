@@ -33,22 +33,29 @@ const ModalScreen = () => {
     // It clears the input fields and displays an alert upon success or failure.
    
   const createLeague = () => {
-    dispatch(
-      createNewLeague({
-        title,
-        members,
-        userId: '33',
-      })
-    )
-      .then(() => {
-        Alert.alert('League Created Successfully');
-        dispatch(fetchLeagues('33'));
-        setTitle('');
-        setMembers('');
-      })
-      .catch((error) => {
-        Alert.alert('Error creating league:', error.message);
-      });
+    //  If either title or members are empty, display an alert.
+    if(title.trim() === '' || members.trim() === '') {
+      Alert.alert('Please fill all the  fields');
+    }
+    else{
+      dispatch(
+        createNewLeague({
+          title,
+          members,
+          userId: '33',
+        })
+      )
+        .then(() => {
+          Alert.alert('League Created Successfully');
+          dispatch(fetchLeagues('33'));
+          setTitle('');
+          setMembers('');
+        })
+        .catch((error) => {
+          Alert.alert('Error creating league:', error.message);
+        });
+    }
+   
   };
 
   return (

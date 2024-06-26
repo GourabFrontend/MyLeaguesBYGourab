@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Modal, TouchableOpacity, Alert } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleModal, createNewLeague } from '../redux/leaguesSlice';
+import { toggleModal, createNewLeague ,editLeague} from '../redux/leaguesSlice';
 import { fetchLeagues } from '../redux/leaguesSlice';
 
   // ModalScreen component displays a modal for creating a new league.
@@ -57,6 +57,37 @@ const ModalScreen = () => {
     }
    
   };
+
+
+
+  // Edit a league by dispatching the editLeague action.
+
+  // const editLeagues = () => {
+  //   //  If either title or members are empty, display an alert.
+  //   if(title.trim() === '' || members.trim() === '') {
+  //     Alert.alert('Please fill all the  fields');
+  //   }
+  //   else{
+  //     dispatch(
+  //       editLeague({
+  //         id,
+  //         title,
+  //         members,
+  //         userId: '33',
+  //       })
+  //     )
+  //       .then(() => {
+  //         Alert.alert('League Updated Successfully');
+  //         dispatch(fetchLeagues('33'));
+  //         setTitle('');
+  //         setMembers('');
+  //       })
+  //       .catch((error) => {
+  //         Alert.alert('Error updating league:', error.message);
+  //       });
+  //   }
+   
+  // };
 
   return (
     <View style={styles.preMain}>

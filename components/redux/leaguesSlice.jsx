@@ -45,6 +45,53 @@ export const createNewLeague = createAsyncThunk('createNewLeague', async ({ titl
   }
 });
 
+
+// editLeague is used to edit an existing league.
+// As i am trying to do for editLeague, i am getting { "success": false,"message": "Invalid request name"}
+//if required payload is given I will update my code
+  
+
+// export const editLeague = createAsyncThunk('editLeague', async ({ leagueId, title, members, userId }) => {
+//   try {
+//     const response = await axios.post(
+//       'https://api.bracketocracy.com/v1.0/api.php?query=league/editLeague',
+//       {
+//         leagueId,
+//         title,
+//         members,
+//         userId,
+//         allowInvitation: 0,
+//       },
+//       {
+//         headers: { 'Content-Type': 'application/json' },
+//       }
+//     );
+//     return { leagueId, title, members };
+//   } catch (error) {
+//     return error;
+//   }
+// });
+
+
+
+
+// deleteLeague is used to delete an existing league.
+export const deleteLeague = createAsyncThunk('deleteLeague', async (leagueId) => {
+  try {
+    const response = await axios.post(
+      'https://api.bracketocracy.com/v1.0/api.php?query=league/deleteLeague',
+      { userId: '33',
+        leagueId,
+         },
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+    return leagueId;
+    
+  } catch (error) {
+    throw error;
+  }
+});
+
 const leaguesSlice = createSlice({
   name: 'leagues',
   initialState,
@@ -93,6 +140,33 @@ const leaguesSlice = createSlice({
         state.openModal = false;
       })
       .addCase(createNewLeague.rejected, (state, action) => {
+        // Set the status of the state to 'error' when the async thunk is rejected
+        // and update the error property with the error message
+        state.status = 'error';
+        state.error = action.error.message;
+      })
+      // .addCase(editLeague.fulfilled, (state, action) => {
+      //   // Update the league details in the state when the async thunk is fulfilled
+      //   state.status = 'idle';
+      //   state.leagues = state.leagues.map((league) =>
+      //     league.id === action.payload.leagueId
+      //       ? { ...league, title: action.payload.title, members: action.payload.members }
+      //       : league
+      //   );
+      // })
+      // .addCase(editLeague.rejected, (state, action) => {
+      //   // Set the status of the state to 'error' when the async thunk is rejected
+      //   // and update the error property with the error message
+      //   state.status = 'error';
+      //   state.error = action.error.message;
+      // })
+      .addCase(deleteLeague.fulfilled, (state, action) => {
+        // Set the status of the state to 'idle' when the async thunk is fulfilled
+        // and close the modal by setting the openModal to false
+        state.status = 'idle';
+        state.leagues = state.leagues.filter((league) => league.id !== action.payload);
+      })
+      .addCase(deleteLeague.rejected, (state, action) => {
         // Set the status of the state to 'error' when the async thunk is rejected
         // and update the error property with the error message
         state.status = 'error';
